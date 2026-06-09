@@ -74,9 +74,4 @@ consistent. Skills are discovered automatically by the `skills` CLI from
 ---
 
 Brought to life by<br/>
-<a href="https://creativestyle.de">
-<picture>
-<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/creativestyle/shopin/main/images/cs_logo_dark.png">
-<img src="https://raw.githubusercontent.com/creativestyle/shopin/main/images/cs_logo_light.png" width="211px">
-</picture>
-</a>
+<a href="https://creativestyle.de" target="_blank" rel="noopener noreferrer"><picture><source media="(prefers-color-scheme: dark)" srcset="https://creativestyle.com/images/logos/creativestyle-logo-white-1x.png"><source media="(prefers-color-scheme: light)" srcset="https://creativestyle.com/images/logos/creativestyle-logo-1x.png"><img src="https://creativestyle.com/images/logos/creativestyle-logo-1x.png" width="211px"></picture></a>
