@@ -53,12 +53,13 @@ apps/bff/src/features/<domain>/
 
 - Prefer `features/<domain>/` to match existing BFF domain organization.
 - Keep unit tests aligned with existing patterns (for example, `product.service.spec.ts`).
+- Not every existing domain has all four files (some lack a spec; `csrf/` diverges with guards/decorators) — `features/product/` is the complete reference.
 
 ### Contracts
 - Define Zod schemas in `core/contracts/` before implementing the module
 - Naming: `*Schema` suffix for Zod schemas, `*Response`/`*Request` for API types
 - Infer types: `type MyType = z.infer<typeof MyTypeSchema>`
-- Run `npm run setup` after adding/changing contracts to rebuild the package
+- Run `npm run setup` after adding/changing contracts — it runs each workspace's `setup` task via Turbo, which rebuilds `@core/contracts` (and any codegen)
 
 ### Validation
 - Validate all inputs against `core/contracts` schemas
@@ -78,4 +79,4 @@ See [references/examples.md](references/examples.md) for existing BFF modules to
 - `npm run check-types`
 - `npm run test -w @apps/bff`
 - `npm run lint`
-- Verify Swagger docs at `http://localhost:4000/bff/api`
+- Verify Swagger docs at `http://localhost:4000/api` (the `bff` global prefix applies to API routes, not the Swagger UI)

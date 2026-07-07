@@ -19,7 +19,7 @@ When unsure, pick the lower tier and escalate if the change turns out bigger tha
 
 ## When to use
 
-When creating a new reusable UI component — either shared (`components/ui/` or `components/layout/`) or feature-specific (`features/<domain>/components/`).
+When creating a new reusable UI component — either shared (`components/ui/` or `components/layout/`) or feature-specific (`features/<domain>/components/`; smaller features keep component files at the feature root instead).
 
 ## Discovery checklist
 
@@ -48,11 +48,12 @@ Ask these questions during the Discover stage:
 - Use Tailwind design tokens — no hardcoded color or spacing values
 - Export a strict TypeScript props interface
 - Component file name matches the component name in kebab-case
+- Feature components imported from outside the feature must be exported from a file at the feature root — ESLint forbids importing from feature subdirectories
 
 ## Translations
 
 If the component displays user-facing text:
-- Add keys to the relevant JSON file in `core/i18n/`
+- Add keys to the locale files in `core/i18n/` (`en-US.json`, `de-DE.json` — one file per locale at the package root)
 - Organize keys by feature domain
 - Server components: use `getTranslations` from `next-intl/server`
 - Client components: use `useTranslations` hook

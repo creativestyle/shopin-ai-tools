@@ -55,14 +55,16 @@ Ask these questions during the Discover stage:
 ### Feature directory structure
 ```
 apps/presentation/features/<feature-name>/
+  <entry>.tsx    — entry points (anything imported from outside the feature)
   components/    — feature-specific UI components
   hooks/         — data fetching, state management
-  actions/       — server actions
-  utils/         — feature-specific utilities
+  lib/           — services and feature-specific utilities
 ```
 
+Small features skip the subdirectories and keep all files at the feature root.
+
 ### Boundaries
-- Feature directories have ESLint-enforced import boundaries
+- ESLint (`no-restricted-imports` in `apps/presentation/eslint.config.mjs`) forbids importing from feature subdirectories — code outside a feature may only import files at the feature root, so anything consumed externally must be (re-)exported from a feature-root entry point
 - Shared reusables go in `components/` or `core/`, not in feature dirs
 - The feature only talks to the BFF — never import from integrations
 
