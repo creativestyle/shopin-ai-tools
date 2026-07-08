@@ -26,7 +26,7 @@ When connecting a new external API (e-commerce platform, CMS, payment provider, 
 Ask these questions during the Discover stage:
 
 - What external API/service is being integrated?
-- Which contract interfaces does it need to implement? (catalog, cart, checkout, navigation, content, auth)
+- Which contract interfaces does it need to implement? See `core/contracts/src/core/data-source-interfaces.ts` — product, product-search, product-collection, cart, customer, auth, content/page, navigation, order, store-config, wishlist, etc.
 - What authentication does the external API require? (API keys, OAuth, tokens)
 - What is the API format? (REST, GraphQL, SDK)
 - Are there existing integrations with a similar pattern to follow?
@@ -47,15 +47,20 @@ Ask these questions during the Discover stage:
 ### Package structure
 ```
 integrations/<provider>-api/
-  package.json                — @integrations/<provider>-api
+  package.json                      — @integrations/<provider>-api
   src/
-    <provider>.module.ts      — main NestJS module
-    <provider>.service-provider.ts — registers services
-    <provider>.client-config.ts    — API client configuration
-    services/                 — service implementations
-    mappers/                  — external format → contract types
-    helpers/                  — utility functions
+    <provider>-api.module.ts        — main NestJS module
+    <provider>-service-provider.ts  — registers services
+    index.ts                        — package entry point
+    interfaces.ts                   — provider-specific interfaces
+    client/                         — API client module + services
+    services/                       — service implementations
+    mappers/                        — external format → contract types
+    schemas/                        — provider response schemas
+    helpers/                        — utility functions
 ```
+
+File names are fully hyphenated and include the package suffix (e.g. `commercetools-api.module.ts`, `commercetools-service-provider.ts`). Client configuration lives in the `client/` directory, not a single config file.
 
 ### Contracts
 - Every integration must implement the contract interfaces from `core/contracts`
@@ -63,7 +68,7 @@ integrations/<provider>-api/
 - If the domain requires new contract types, add them to `core/contracts` first and run `npm run setup`
 
 ### Isolation
-- No cross-integration imports — each integration is self-contained
+- Avoid cross-integration imports — keep each integration self-contained. The one sanctioned exception is `commercetools-auth`, which builds on `@integrations/commercetools-api`; don't add new cross-integration dependencies without a similarly tight coupling reason
 - Keep provider-specific logic inside the integration package
 
 ### Registration

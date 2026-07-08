@@ -10,7 +10,7 @@ Complex feature with hooks, components, services, and providers.
 - Components: `apps/presentation/features/cart/components/`
 - Hooks: `apps/presentation/features/cart/hooks/` (use-add-to-cart, use-remove-cart-item, etc.)
 - Service: `apps/presentation/features/cart/lib/cart-bff-service.ts`
-- BFF module: `apps/bff/src/features/product/` (for the backend pattern)
+- BFF module: `apps/bff/src/features/cart/`
 
 ## Product (simpler reference)
 
